@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+</head>
+<body>
+<div>
+<h1>Lets add another user to the mix</h1>
+</div>
+
+<div>
+  <form method="POST" action="/add_user">
+    <label for="name">What is your name : </label><br>
+    <input type="text" id="name" name="name" value="{{name}}" required><br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
