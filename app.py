@@ -102,8 +102,3 @@ def something():
 if __name__ in "__main__":
     app.run(debug=True)
 
-# json_data = json_data_manager("dataManagement/json_data.json")
-# users = json_data.update_user_movie(1)
-# csv_data = CSVDataManager("dataManagement/json_data.json")
-# csv_user = csv_data.get_user_movies(1)
-# print(users)
