@@ -1,5 +1,5 @@
-from functionality.Data_managment import json_data_manager, CSVDataManager
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from functionality.Data_managment import json_data_manager
+from flask import Flask, render_template, request, redirect, url_for
 
 """
 I like to assign global variables at the top for ease of use
@@ -8,10 +8,11 @@ app = Flask(__name__)
 app.secret_key = "super_secret"
 data_manager = json_data_manager("dataManagement/json_data.json")
 
-
 """
 The list of users page
 """
+
+
 @app.route("/", methods=["GET", "POST"])
 def list_users():
     users = data_manager.list_all_users()
@@ -19,10 +20,11 @@ def list_users():
     return render_template("users.html", users=users)
 
 
-
 """
 The Movie Database of the user
 """
+
+
 @app.route('/users/<int:user_id>')
 def user_movies(user_id):
     user = [name for name in data_manager.list_all_users() if name["id"] == user_id]
@@ -31,10 +33,11 @@ def user_movies(user_id):
     return render_template("user_page.html", user_id=user_id, user=user, movies=the_movies)
 
 
-
 """
 Adds a new user
 """
+
+
 @app.route('/add_user', methods=["GET", "POST"])
 def add_user():
     if request.method == "POST":
@@ -45,10 +48,11 @@ def add_user():
     return render_template("add_user.html")
 
 
-
 """
 Adds a movie to the users database
 """
+
+
 @app.route('/users/<int:user_id>/add_movie', methods=["GET", "POST"])
 def add_movie(user_id):
     user_movie = data_manager.get_user_movies(user_id)
@@ -64,10 +68,10 @@ def add_movie(user_id):
     return render_template("add_movie.html", movies=user_movie, id=user_id)
 
 
-
 """
 Updates the users notes on the film
 """
+
 
 @app.route('/users/<user_id>/update_movie/<movie_id>', methods=["GET", "POST"])
 def update_movie(user_id, movie_id):
@@ -95,10 +99,12 @@ def delete_movie(user_id, movie_id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
 @app.route("/something")
 def something():
     return render_template("something.html")
 
+
 if __name__ in "__main__":
     app.run(debug=True)
-

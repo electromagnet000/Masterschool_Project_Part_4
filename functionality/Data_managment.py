@@ -1,7 +1,5 @@
 from .Data_interface import Data_manager
 import json
-import csv
-import pandas as pd
 import requests
 
 
@@ -72,7 +70,10 @@ class json_data_manager(Data_manager):
 
     def get_user_movies(self, user_id):
         try:
-            # if the user id is not found within the data file then it will return a message stating that the user is not found
+            """ 
+            if the user id is not found within the data file then it will return a message stating that the user is
+            not found
+            """
             if user_id not in range(1, len(self.data) + 1):
                 raise ValueError
             # Using list comprehension im extracting the movies from the given user_id
@@ -91,7 +92,7 @@ class json_data_manager(Data_manager):
     Update Function : offers users a way to update the film ratings
     """
 
-    def update_user_movie(self,user_id, movie_id, update_notes):
+    def update_user_movie(self, user_id, movie_id, update_notes):
 
         # now I filter through the movie data for chosen title
         for user in range(len(self.data)):
@@ -101,8 +102,6 @@ class json_data_manager(Data_manager):
                     if self.data[user]["movies"][movie]["id"] == int(movie_id):
                         # now we assign the new rating and return a confirmation message
                         self.data[user]["movies"][movie]["Notes"] = str(update_notes)
-
-
 
                 # lastly we store the updated data
                 with open(self.filename, "w") as new_file:
@@ -162,6 +161,7 @@ class json_data_manager(Data_manager):
     """
     A function to Delete movies
     """
+
     def delete_movie(self, user_id, movie_id, title):
 
         # Using a for loop we can filter information until we get the desired info
@@ -197,8 +197,3 @@ class json_data_manager(Data_manager):
 
         with open(self.filename, "w") as new_file:
             json.dump(self.data, new_file)
-
-
-
-
-
