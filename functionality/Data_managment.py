@@ -91,16 +91,18 @@ class json_data_manager(Data_manager):
     Update Function : offers users a way to update the film ratings
     """
 
-    def update_user_movie(self,user_id, chosen_title, notes):
+    def update_user_movie(self,user_id, movie_id, update_notes):
 
         # now I filter through the movie data for chosen title
         for user in range(len(self.data)):
-            if self.data[user]["id"] == user_id:
-                for movie in self.data[user]["movies"]:
+            if self.data[user]["id"] == int(user_id):
+                for movie in range(len(self.data[user]["movies"])):
                     # here I filter through the chosen users movies with a simple if statement
-                    if movie["id"] == chosen_title:
+                    if self.data[user]["movies"][movie]["id"] == int(movie_id):
                         # now we assign the new rating and return a confirmation message
-                        movie["Notes"] = notes
+                        self.data[user]["movies"][movie]["Notes"] = str(update_notes)
+
+
 
                 # lastly we store the updated data
                 with open(self.filename, "w") as new_file:
@@ -139,7 +141,7 @@ class json_data_manager(Data_manager):
                 if key in requested_parameters:
                     requested_data[key] = value
 
-            requested_data["Notes"] = user_notes
+            requested_data["Notes"] = str(user_notes)
 
             # checks if anything was actually fetched
             try:

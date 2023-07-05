@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{user["name"]}} Homepage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div>
@@ -10,22 +11,34 @@
     <h2>Here is your movie database</h2>
 </div>
 <a href="/">Home</a>
+<div class="success_message">
+    <p>{{success_message}}</p>
+</div>
+
+<div>
+     <form method="GET" action="/users/{{user['id']}}/add_movie">
+            <input class="button" type="submit" value="Add movie">
+        </form>
+</div>
+
 <div class="movie_list">
     <ul>
 {% for movie in movies %}
     <li>{{movie["Title"]}}</li>
         {% if movie['Poster'] %}
-            <img class="movie_poster" alt="movie_poster" title="{{movie['Notes']}}" src="{{movie['Poster']}}">
+        <a href="https://www.imdb.com/title/{{movie['imdbID']}}"><img class="movie_poster" alt="movie_poster" title="{{movie['Notes']}}" src="{{movie['Poster']}}"></a>
         {% endif %}
 
-        <form method="GET" action="/users/{{user_id}}/update_movie/{{movie['id']}}">
-        <input class="button" type="submit" value="Update">
-        </form>
+        {% if movie %}
+            <form method="GET" action="/users/{{user_id}}/update_movie/{{movie['id']}}">
+            <input class="button" type="submit" value="Update">
+            </form>
 
-        <form method="DELETE" action="/users/{{user_id}}/delete_movie/{{movie['id']}}">
-            <input type=hidden name="delete_movie" value="{{movie['Title']}}">
-        <input class="submit-button" type="submit" value="Delete">
-        </form>
+            <form method="POST" action="/users/{{user_id}}/delete_movie/{{movie['id']}}">
+                <input type=hidden name="delete_movie" value="{{movie['Title']}}">
+            <input class="submit-button" type="submit" value="Delete">
+            </form>
+        {% endif %}
 {% endfor %}
     </ul>
 </div>

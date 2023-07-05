@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Movie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div>
     <h1>Your movie database</h1>
 </div>
+
+
+<div>
+    <a href="/">Home</a>
+</div>
+
+
 <div>
     <p>{{success_message}}</p>
 </div>
@@ -17,7 +25,7 @@
     {% for movie in movies %}
         <li>{{movie["Title"]}}</li>
         {% if movie['Poster'] %}
-            <img class="movie_poster" alt="movie_poster" title="{{movie['Notes']}}" src="{{movie['Poster']}}">
+            <img class="movie_poster" alt="movie_poster" title="{{movie['Notes']}}" src="{{movie['Poster']}}" href="{{movie['">
         {% endif %}
     {% endfor %}
     </ul>
@@ -34,8 +42,6 @@
     </form>
 </div>
 
-<div>
-    <a href="/">Home</a>
-</div>
+
 </body>
 </html>
