@@ -17,6 +17,9 @@
     {% for user in users %}
         <li><a href="/users/{{user['id']}}">{{user["name"]}}</a></li>
         <br>
+        <form method="GET" action="/users/{{user['id']}}/add_movie">
+            <input class="button" type="submit" value="Add movie">
+        </form>
         {% endfor %}
     </ul>
 </div>

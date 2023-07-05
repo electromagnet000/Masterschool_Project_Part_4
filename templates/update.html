@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Details</title>
+</head>
+<body>
+<div>
+     <h1>Update Movie</h1>
+    <div>
+        <h1>{{movie}}</h1>
+    </div>
+    <form method="POST" action="/users/{{id}}/update_movie/{{movie_id}}">
+        <label for="notes">What are your thoughts on this film?</label>
+        <input type="text" id="notes" name="notes" value="{{notes}}" required>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+</body>
+</html>
