@@ -1,10 +1,182 @@
-.Users_title {
-    font-family: sans-serif;
-    font-size: 40px;
+body{
+    background:#1e1e1e;
+    color: white;
+}
+
+.Users_title{
+    font-size: 50px;
+    margin: 20px;
     display: flex;
     justify-content: center;
-
+    font-family: sans-serif;
 }
-
 .all_users {
+    display:flex;
+    justify-content:center;
+    margin:20px;
 }
+
+.user_ul {
+    display: grid;
+    grid-auto-flow: column;
+    list-style: none;
+    gap: 20px;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: x-large;
+}
+
+.add_user{
+    font-size: 30px;
+    text-decoration: none;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    }
+
+.add_user a{
+    text-decoration: none;
+    color: white;
+}
+
+.add_user_form{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 500px;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    top: 400px;
+    left: 45rem;
+    font-family: sans-serif;
+}
+
+.add_form_display{
+    display: grid;
+    grid-template-columns: 200px 200px;
+    gap: 200px;
+    justify-content: center;
+    height: 80vh;
+    align-items: center;
+    font-family: sans-serif;
+    line-height: 23px;
+}
+
+
+
+ul {
+
+    list-style: none;
+    gap: 20px;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: x-large;
+}
+
+.users_ul{    display: grid;
+    grid-auto-flow: column;
+    list-style: none;
+    gap: 20px;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: x-large;
+}
+
+a{
+text-decoration: none;
+color: white;
+transition: 0.6s
+}
+
+li a:hover {
+font-size: 40px;
+color: #1e1e1e;
+transition: 0.6s;
+background-color:white;
+border-radius: 25px;
+padding:20px;
+}
+img {
+height: 10em;}
+
+
+.movie_list{
+    margin: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    list-style: none;
+    gap: 20px;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;}
+
+.welcome_message {
+    font-size: 30px;
+    font-family: sans-serif;
+    display: grid;
+    justify-content: space-evenly;
+    text-align: center;
+    margin: 50px;
+    line-height: 15px;
+}
+
+.top_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    }
+
+.home_button{
+    font-size: 16px;
+    font-family: sans-serif;
+    color: white;
+    transition: 0.6s;
+}
+
+
+.home_button:hover {
+    font-size: 20px;
+    font-family: sans-serif;
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: 0.6s;
+    }
+
+.button {
+    font-size: 16px;
+    font-family: sans-serif;
+    background-color: transparent;
+    border: none;
+    color: white;
+    transition: 0.6s;
+}
+
+.button:hover {
+    font-size: 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: black;
+    transition: 0.6s;
+    cursor: pointer;
+    }
+
+.input_box {
+    background: transparent;
+    border: solid 1px white;
+    padding: 5px 10px;
+    border-radius: 25px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;}
+
+.success_message{
+    font-family: sans-serif;
+    font-size: 30px;
+    display: grid;
+    justify-content: center;
+    text-align: center;}

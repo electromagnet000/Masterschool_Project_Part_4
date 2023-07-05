@@ -6,16 +6,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div>
+<div class="add_user_form">
+<div >
      <h1>Update Movie</h1>
     <div>
         <h1>{{movie}}</h1>
     </div>
     <form method="POST" action="/users/{{id}}/update_movie/{{movie_id}}">
         <label for="notes">What are your thoughts on this film?</label>
-        <input type="text" id="notes" name="notes" value="{{notes}}" required>
-        <input class="submit-button" type="submit" value="Submit">
+        <input class="input_box" type="text" id="notes" name="notes" value="{{notes}}" required>
+        <input class="button" type="submit" value="Submit">
     </form>
+</div>
 </div>
 
 </body>

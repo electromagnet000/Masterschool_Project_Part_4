@@ -6,27 +6,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div>
-    <h1>Your movie database</h1>
-</div>
 
 
-<div>
-    <a href="/">Home</a>
-</div>
 
 
-<div>
+
+<div class="success_message">
     <p>{{success_message}}</p>
+    <div>
+    <a class="home_button" href="/">Home</a>
 </div>
+</div>
+
+<div class="add_form_display">
 <div>
     <h3>Here is your movie list</h3>
     <ul>
     {% for movie in movies %}
         <li>{{movie["Title"]}}</li>
-        {% if movie['Poster'] %}
-            <img class="movie_poster" alt="movie_poster" title="{{movie['Notes']}}" src="{{movie['Poster']}}" href="{{movie['">
-        {% endif %}
     {% endfor %}
     </ul>
 </div>
@@ -35,13 +32,13 @@
     <h3>Add another film? just fill in the form below</h3>
     <form method="POST" action="/users/{{id}}/add_movie">
         <lable for="movie_name">What's the title of the film you want to add</lable>
-        <input type="text" id="movie_name" name="movie_name" value="{{movie_name}}" required>
+        <input class="input_box" type="text" id="movie_name" name="movie_name" value="{{movie_name}}" required>
         <label for="movie_notes">Anything of note about this film?</label>
-        <input type="text" id="movie_notes" name="movie_notes" value="{{movie_notes}}">
-        <input type="submit" value="Search for film">
+        <input class="input_box" type="text" id="movie_notes" name="movie_notes" value="{{movie_notes}}">
+        <input class="button" type="submit" value="Search for film">
     </form>
 </div>
-
+</div>
 
 </body>
 </html>

@@ -9,12 +9,12 @@
 <div class="Users_title">
 <h1>Users</h1>
 </div>
-<div>
-    <a href="add_user">Add user</a>
+<div class="add_user">
+    <a class="button" href="add_user">Add user</a>
 </div>
 
 <div class="all_users">
-    <ul>
+    <ul class="users_ul">
     {% for user in users %}
         <li><a href="/users/{{user['id']}}">{{user["name"]}}</a></li>
         {% endfor %}

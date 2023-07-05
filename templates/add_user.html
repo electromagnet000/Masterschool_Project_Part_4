@@ -6,17 +6,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div>
-<h1>Lets add another user to the mix</h1>
+
+<div class="add_user_form">
+
+    <div>
+    <h1>Lets add another user to the mix</h1>
+    </div>
+
+    <div>
+      <form method="POST" action="/add_user">
+        <label for="name">What is your name : </label><br>
+        <input class="input_box" type="text" id="name" name="name" value="{{name}}" required><br>
+        <input class="button" type="submit" value="Submit">
+      </form>
+    </div>
+
 </div>
 
-<div>
-  <form method="POST" action="/add_user">
-    <label for="name">What is your name : </label><br>
-    <input type="text" id="name" name="name" value="{{name}}" required><br>
-    <input type="submit" value="Submit">
-  </form>
-</div>
 
 </body>
 </html>
