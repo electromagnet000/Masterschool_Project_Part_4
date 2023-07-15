@@ -52,10 +52,10 @@ class json_data_manager(Data_manager):
     Creates a brand new user
     """
 
-    def add_user(self, new_username):
+    def add_user(self, new_username, password):
         new_id = self.generate_id()
 
-        new_user = {"id": new_id, "name": new_username, "movies": []}
+        new_user = {"id": new_id, "name": new_username, "movies": [], "password": password}
 
         self.data.append(new_user)
 
@@ -106,7 +106,25 @@ class json_data_manager(Data_manager):
                 # lastly we store the updated data
                 with open(self.filename, "w") as new_file:
                     json.dump(self.data, new_file)
-                    return "success"
+
+
+    """
+    Updates user details
+    """
+    def update_user_details(self, user_data, username, password):
+
+        #first we need to filter through the data
+        for user in range(len(self.data)):
+            #Now we check if the id matches
+            if int(user_data['id']) == self.data[user]['id']:
+                #Lastly we change the users data
+                self.data[user]["name"] = username
+                self.data[user]["password"] = password
+
+        # lastly we store the updated data
+        with open(self.filename, "w") as new_file:
+            json.dump(self.data, new_file)
+
 
     """
     Add movie function

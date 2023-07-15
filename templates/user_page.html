@@ -6,20 +6,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<div class="welcome_message">
-    <h1>Welcome {{user["name"]}}</h1>
+<div class="top_left_position">
+<div><a class="highlight_button" href="/">Logout</a></div>
+<div><a class="highlight_button" href="/users/{{user_id}}/settings">Settings</a></div>
+</div>
+    <div class="welcome_message">
+    <h1>Welcome {{user}}</h1>
     <h2>Here is your movie database</h2>
 </div>
 
-<div class="success_message">
-    <p>{{success_message}}</p>
-</div>
 
 <div class="top_buttons">
-    <a class="home_button" href="/">Home</a>
-
      <form method="GET" action="/users/{{user_id}}/add_movie">
-         <input class="button" type="submit" value="Add movie">
+         <input class="highlight_button" type="submit" value="Add movie">
      </form>
 </div>
 
@@ -27,21 +26,27 @@
     <ul class="movie_list">
 {% for movie in movies %}
         <div class="movie_container">
-    <li>{{movie["Title"]}}</li>
+
         {% if movie['Poster'] %}
         <a href="https://www.imdb.com/title/{{movie['imdbID']}}"><img class="movie_poster" alt="movie_poster" title="{{movie['Notes']}}" src="{{movie['Poster']}}"></a>
+            <li>{{movie["Title"]}}</li>
         {% endif %}
 
         {% if movie['Title'] %}
+            <div class="movie_info_box">
+                <div class="Rating">
+                    <p>{{movie['imdbRating']}}</p>
+                </div>
             <div class="update_delete_buttons">
             <form method="GET" action="/users/{{user_id}}/update_movie/{{movie['id']}}">
-            <input class="button" type="submit" value="Update">
+            <input class="form_button" type="submit" value="Update">
             </form>
 
             <form method="POST" action="/users/{{user_id}}/delete_movie/{{movie['id']}}">
                 <input type=hidden name="delete_movie" value="{{movie['Title']}}">
-            <input class="button" type="submit" value="Delete">
+            <input class="form_button" type="submit" value="Delete">
             </form>
+            </div>
             </div>
         {% endif %}
       </div>

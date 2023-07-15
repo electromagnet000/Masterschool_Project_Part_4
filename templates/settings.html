@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="top_left_position"><a class="highlight_button" href="/users/{{user_id}}">Back</a></div>
+
+<div class="welcome_message">
+    <div>
+  <h1>Settings</h1>
+</div>
+  <h2>What would you like to change?</h2>
+</div>
+
+<div class="setting-display">
+  <div><a class="highlight_button" href="/users/{{user_id}}/settings/account_settings">Account settings</a></div>
+  <div><a class="highlight_button" href="/profile_settings">Profile settings</a></div>
+  <div><a class="highlight_button" href="/accessibility_settngs"> Accessibility Settings</a></div>
+</div>
+</body>
+</html>

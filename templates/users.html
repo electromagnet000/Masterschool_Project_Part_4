@@ -10,13 +10,13 @@
 <h1>Users</h1>
 </div>
 <div class="add_user">
-    <a class="button" href="add_user">Add user</a>
+    <a class="highlight_button" href="add_user">New user +</a>
 </div>
 
 <div class="all_users">
     <ul class="users_ul">
     {% for user in users %}
-        <li><a href="/users/{{user['id']}}">{{user["name"]}}</a></li>
+        <li><a href="/users/login/{{user['id']}}">{{user["name"]}}</a></li>
         {% endfor %}
     </ul>
 </div>

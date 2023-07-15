@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="top_left_position"><a class="highlight_button" href="/users/{{user_id}}">Back</a></div>
+<div class="welcome_message">
+<h1>Update details</h1>
+</div>
+<div class="flashes">
+   {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+<div class="account_settings_form">
+  <form action="/users/{{user_id}}/settings/account_settings" method="POST">
+      <label for="current_password">Please enter current password for changes</label>
+      <input class="input_box" type="password" id="current_password" name="current_password" value="{{current_password}}" placeholder="Your current password" required>
+    <label for="username">Change your username</label>
+      <input class="input_box" type="text" id="username" name="username" value="{{username}}">
+      <label for="new_password">Change your Password</label>
+    <input class="input_box" type="password" id="new_password" name="new_password" value="{{new_password}}" placeholder="Your new password">
+      <input class="button" type="submit" value="Submit">
+  </form>
+</div>
+</body>
+</html>

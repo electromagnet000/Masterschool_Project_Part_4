@@ -13,6 +13,8 @@
         <h1>{{movie}}</h1>
     </div>
     <form method="POST" action="/users/{{id}}/update_movie/{{movie_id}}">
+        <label for="Rating">What is the rating you would like to give it?</label>
+        <input class="input_box" type="text" id="Rating" name="Rating" value="{{Rating}}">
         <label for="notes">What are your thoughts on this film?</label>
         <input class="input_box" type="text" id="notes" name="notes" value="{{notes}}" required>
         <input class="button" type="submit" value="Submit">

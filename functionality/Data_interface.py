@@ -9,3 +9,11 @@ class Data_manager(ABC):
     def get_user_movies(self, user_id):
         pass
 
+class User_data(ABC):
+    @abstractmethod
+    def get_username(self):
+        pass
+
+    @abstractmethod
+    def get_password(self):
+        pass
