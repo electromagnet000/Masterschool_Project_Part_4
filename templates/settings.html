@@ -30,13 +30,14 @@
   <h2>What would you like to change?</h2>
 </div>
 
-    <div class="account_deletion">
+     <div class="account_deletion">
         <form action="/users/{{user_id}}/delete_user" method="POST">
             <label for="delete_user">To delete your account enter your password and press submit </label>
             <input class="input_box" type="password" id="delete_user" name="delete_user" value="{{delete_user}}" placeholder="Password..." required>
             <input class="button" type="submit" value="Submit">
         </form>
     </div>
+
 
 <div class="setting-display">
   <div><a class="highlight_button" href="/users/{{user_id}}/settings/account_settings">Account settings</a></div>
