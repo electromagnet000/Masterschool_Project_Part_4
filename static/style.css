@@ -1,6 +1,7 @@
 body{
     background:#1e1e1e;
     color: white;
+
 }
 
 .Users_title{
@@ -150,6 +151,11 @@ height: 10em;}
     grid-template-columns: 200px;
     justify-content: center;
     padding: 50px;
+    font-family: sans-serif;
+}
+.account_deletion{
+    display: flex;
+    justify-content: center;
     font-family: sans-serif;
 }
 
@@ -332,3 +338,56 @@ font-size: 50px;}
     color: white;
     border: solid 1px white;
     overflow: hidden;}
+
+.color_button {
+    text-decoration: none;
+    color: transparent;
+    background: transparent;
+    border: none;
+    padding: 50px 50px;
+    border-radius: 5px;
+    opacity: 0.5;
+    transition: 0.2s;
+}
+
+.color_button:hover {
+    opacity: 1;
+    transition: 0.5s;
+    color: white;
+    font-size: 20px;
+}
+
+.personalised_settings_box {
+
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    gap: 50px;
+    font-family: sans-serif;
+    position: relative;
+    top: 292px;
+}
+
+
+.bg_red {
+    background-color: red;
+    }
+
+.bg_blue {
+    background-color: blue;
+   }
+
+.bg_green {
+    background-color: green;
+    }
+
+.bg_orange {
+
+    background-color: orange;
+   }
+
+.bg_purple {
+    background-color: purple;
+    }
+
+

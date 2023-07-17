@@ -1,3 +1,20 @@
+window.onload = function() {
+      var color = sessionStorage.getItem('color');
+      if (color) {
+        document.body.style.backgroundColor = color;
+      }
+    }
+
+function changeBackgroundColor(color) {
+    document.body.style.background = color;
+    sessionStorage.setItem('color', color);
+    }
+
+function logout() {
+    sessionStorage.clear();
+    window.location.href = "/"
+}
+
 
 var myInput = document.getElementById("password");
 var letter = document.getElementById("letter");
@@ -56,3 +73,33 @@ myInput.onkeyup = function() {
     length.classList.add("invalid");
   }
 }
+
+//
+//var background = {
+//
+//white: #fff,
+//reset: #1e1e1e
+//
+//}
+//
+//
+//
+//var key = sessionStorage.getItem ('key');
+//var obj = JSON.parse(key);
+//
+//
+//var settings = load_settings();
+//setBackground(settings.background);
+//
+//document.getElementById("button_test").addEventListener("click", white_background)
+//document.getElementById("button_reset").addEventListener("click", reset)
+//
+//function setBackground(background) {
+//$('body').css("background-color", "background")
+//localStorage.setItem("settings.background", background);
+//}
+//
+
+
+
+

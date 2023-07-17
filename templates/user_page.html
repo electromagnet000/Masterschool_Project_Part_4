@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>{{user["name"]}} Homepage</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
 </head>
 <body>
+
 <div class="top_left_position">
-<div><a class="highlight_button" href="/">Logout</a></div>
+<div><button onclick="logout()" class="highlight_button">Logout</button></div>
 <div><a class="highlight_button" href="/users/{{user_id}}/settings">Settings</a></div>
 </div>
     <div class="welcome_message">

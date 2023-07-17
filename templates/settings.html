@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <title>Settings</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
 </head>
 <body>
 
-<div class="top_left_position"><a class="highlight_button" href="/users/{{user_id}}">Back</a></div>
+<div class="top_left_position"><a class="highlight_button" href="/users/{{user_id}}">Back</a>
+</div>
+
+<div class="flashes">
+   {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 
 <div class="welcome_message">
     <div>
@@ -18,8 +32,16 @@
 
 <div class="setting-display">
   <div><a class="highlight_button" href="/users/{{user_id}}/settings/account_settings">Account settings</a></div>
-  <div><a class="highlight_button" href="/profile_settings">Profile settings</a></div>
-  <div><a class="highlight_button" href="/accessibility_settngs"> Accessibility Settings</a></div>
+  <div><a class="highlight_button" href="/users/{{user_id}}/settings/profile_settings">Profile settings</a></div>
+  <div><a class="highlight_button" href="/users/{{user_id}}/settings/accessibility_settngs"> Accessibility Settings</a></div>
 </div>
+<div class="account_deletion">
+        <form action="/users/{{user_id}}/delete_user" method="POST">
+            <label for="delete_user">To delete your account enter your password and press submit </label>
+            <input class="input_box" type="password" id="delete_user" name="delete_user" value="{{delete_user}}" placeholder="Password..." required>
+            <input class="button" type="submit" value="Submit">
+        </form>
+    </div>
+
 </body>
 </html>

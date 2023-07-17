@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="top_left_position"><a class="highlight_button" href="/users/{{user_id}}">Back</a></div>
+<div class="personalised_settings_box">
+    <div>
+    <label>What would you like the background color to be?</label>
+    </div>
+    <div>
+        <button class="color_button bg_red" onclick="changeBackgroundColor('#FF0000')">Red</button>
+    <button class="color_button bg_blue" onclick="changeBackgroundColor('#0000FF')">Blue</button>
+    <button class="color_button bg_green" onclick="changeBackgroundColor('#00FF00')">Green</button>
+    <button class="color_button bg_orange" onclick="changeBackgroundColor('#FFA500')">Orange</button>
+    <button class="color_button bg_purple" onclick="changeBackgroundColor('#800080')">Purple</button>
+</div>
+    <div>
+        <button class="button" onclick="changeBackgroundColor('#1e1e1e')">Restore Default</button>
+
+    </div>
+
+</div>
+</body>
+</html>

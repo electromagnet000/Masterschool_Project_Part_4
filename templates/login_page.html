@@ -9,14 +9,21 @@
 <div class="top_left_position">
 <a class="highlight_button" href="http://127.0.0.1:5000/add_user">Don't have an account? Sign up!</a>
 </div>
-
+    <div>
+       {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</div>
 <div class="user_login_form">
     <div>
         <h1>Login</h1>
     </div>
-    <div>
-    <p>{{msg}}</p>
-</div>
 <div>
     <form action="/users/login/{{user_id}}" method="POST">
     <label for="username">Username :</label>

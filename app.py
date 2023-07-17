@@ -1,5 +1,4 @@
 from functionality.Data_managment import json_data_manager
-from functionality.user_data import User
 from flask import Flask, render_template, request, redirect, url_for, session, g, flash
 import os
 
@@ -9,7 +8,6 @@ I like to assign global variables at the top for ease of use
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 data_manager = json_data_manager("dataManagement/json_data.json")
-
 """
 The list of users page
 """
@@ -30,21 +28,20 @@ The login function
 
 @app.route('/users/login/<int:user_id>', methods=["GET", "POST"])
 def login(user_id):
-    msg = ""
     chosen_user = [user_data for user_data in data_manager.list_all_users() if user_data["id"] == user_id]
-    session_user = User(chosen_user[0])
+    session_user = chosen_user[0]
 
     if request.method == "POST":
         session.pop("user", None)
 
-        if request.form.get("password") == session_user.password and request.form.get("username") == session_user.name:
-            print(session_user.password)
+        if request.form.get("password") == session_user['password'] and request.form.get("username") == session_user[
+            'name']:
             session['user'] = request.form["username"]
             return redirect(url_for('user_movies', user_id=user_id))
         else:
-            msg = "Please make sure Username and Password are correct"
+            flash("Please make sure Username and Password are correct")
 
-    return render_template("login_page.html", user_id=user_id, user=chosen_user[0], msg=msg)
+    return render_template("login_page.html", user_id=user_id, user=chosen_user[0])
 
 
 """
@@ -59,6 +56,22 @@ def user_settings(user_id):
 
 
 """
+Delete account
+"""
+
+
+@app.route("/users/<int:user_id>/delete_user", methods=["POST"])
+def delete_user(user_id):
+    chosen_user = [user_data for user_data in data_manager.list_all_users() if user_data["id"] == user_id]
+    if request.form.get("delete_user") == chosen_user[0]["password"]:
+        data_manager.delete_user(user_id)
+        return redirect(url_for('list_users'))
+    else:
+        flash("Password not correct")
+        return render_template("settings.html", user_id=user_id)
+
+
+"""
 Account settings
 This will deal with a persons personal details
 """
@@ -66,7 +79,6 @@ This will deal with a persons personal details
 
 @app.route("/users/<int:user_id>/settings/account_settings", methods=["GET", "POST"])
 def account_settings(user_id):
-
     if request.method == "POST":
         chosen_user = [user_data for user_data in data_manager.list_all_users() if user_data["id"] == user_id]
         password = request.form.get("current_password")
@@ -87,6 +99,26 @@ def account_settings(user_id):
         flash("Password not correct")
         return render_template("account settings.html", user_id=user_id)
     return render_template("account settings.html", user_id=user_id)
+
+
+"""
+Personalise settings
+"""
+
+
+@app.route("/users/<int:user_id>/settings/profile_settings")
+def profile_settings(user_id):
+    return render_template("Personalised settings.html", user_id=user_id)
+
+
+"""
+Accessibility settings
+"""
+
+
+@app.route("/users/<int:user_id>/settings/accessibility_settngs")
+def accessibility_settings(user_id):
+    return render_template("Accessibility settings.html", user_id=user_id)
 
 
 """
@@ -143,7 +175,7 @@ Updates the users notes on the film
 """
 
 
-@app.route('/users/<user_id>/update_movie/<movie_id>', methods=["GET", "POST"])
+@app.route('/users/<int:user_id>/update_movie/<int:movie_id>', methods=["GET", "POST"])
 def update_movie(user_id, movie_id):
     if request.method == "POST":
         note_updates = request.form.get("notes")
@@ -151,7 +183,7 @@ def update_movie(user_id, movie_id):
         success_message = data_manager.update_user_movie(user_id, movie_id, note_updates)
 
         return redirect(url_for("user_movies", user_id=user_id, success_message=success_message))
-    return render_template("update.html", id=user_id, movie_id=movie_id)
+    return render_template("update.html", user_id=user_id, movie_id=movie_id)
 
 
 """

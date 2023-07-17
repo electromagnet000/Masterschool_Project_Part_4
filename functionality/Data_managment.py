@@ -215,3 +215,28 @@ class json_data_manager(Data_manager):
 
         with open(self.filename, "w") as new_file:
             json.dump(self.data, new_file)
+
+    """
+    A function to delete the User
+    """
+    def delete_user(self, user_id):
+        # Using a for loop we can filter information until we get the desired info
+        for user in range(len(self.data)):
+            # here we check if the user id is correct
+            if self.data[user]["id"] == int(user_id):
+                # now we get rid of the user
+                self.data.remove(self.data[user])
+
+
+        updated_id = 1
+
+        for user in range(len(self.data)):
+            self.data[user]['id'] = updated_id
+            updated_id += 1
+
+        """
+        Now the user IDs are unique 
+        """
+
+        with open(self.filename, "w") as new_file:
+            json.dump(self.data, new_file)
