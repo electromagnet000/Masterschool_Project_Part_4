@@ -221,11 +221,11 @@ class json_data_manager(Data_manager):
     """
     def delete_user(self, user_id):
         # Using a for loop we can filter information until we get the desired info
-        for user in range(len(self.data)):
+        for user in self.data:
             # here we check if the user id is correct
-            if self.data[user]["id"] == int(user_id):
+            if user["id"] == int(user_id):
                 # now we get rid of the user
-                self.data.remove(self.data[user])
+                self.data.remove(user)
 
 
         updated_id = 1
