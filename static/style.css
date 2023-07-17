@@ -316,14 +316,16 @@ margin: 20px;
 }
 
 .setting-display {
-    display: grid;
-    grid-template-columns: auto auto auto;
+     display: grid;
+    grid-template-columns: auto;
     font-size: 50px;
     font-family: sans-serif;
     justify-content: space-evenly;
     align-items: center;
     position: relative;
-    top: 4em;}
+    margin: 50px;
+    row-gap: 10px;
+    text-align: center;}
 
 .setting-display a{
 font-size: 50px;}
