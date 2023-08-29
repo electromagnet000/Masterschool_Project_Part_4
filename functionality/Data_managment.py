@@ -1,6 +1,11 @@
-from .Data_interface import Data_manager
+from functionality.Data_interface import Data_manager
+from flask_sqlalchemy import SQLAlchemy
 import json
 import requests
+from data_models import User, Data, Movie
+
+
+
 
 
 # handles all the json datafiles

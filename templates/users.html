@@ -9,14 +9,21 @@
 <div class="Users_title">
 <h1>Users</h1>
 </div>
+<div class="message">
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}</div>
+</div>
 <div class="add_user">
     <a class="highlight_button" href="add_user">New user +</a>
+
 </div>
+
 
 <div class="all_users">
     <ul class="users_ul">
     {% for user in users %}
-        <li><a href="/users/login/{{user['id']}}">{{user["name"]}}</a></li>
+        <li><a href="/users/login/{{ user.id }}">{{ user }}</a></li>
         {% endfor %}
     </ul>
 </div>

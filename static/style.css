@@ -84,7 +84,7 @@ ul {
     font-size: x-large;
 }
 
-.users_ul{    display: grid;
+.Users_display{ display: grid;
     grid-auto-flow: column;
     list-style: none;
     gap: 20px;
@@ -92,6 +92,7 @@ ul {
     font-family: sans-serif;
     font-size: x-large;
 }
+
 
 a{
 text-decoration: none;

@@ -1,4 +1,4 @@
-import json
+
 from abc import ABC, abstractmethod
 
 class Data_manager(ABC):
@@ -16,4 +16,9 @@ class User_data(ABC):
 
     @abstractmethod
     def get_password(self):
+        pass
+
+class sql_datamanager(ABC):
+    @abstractmethod
+    def get_users(self):
         pass
