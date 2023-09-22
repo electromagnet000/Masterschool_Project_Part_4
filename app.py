@@ -7,7 +7,7 @@ I like to assign global variables at the top for ease of use
 """
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-data_manager = json_data_manager("dataManagement/json_data.json")
+data_manager = json_data_manager("Masterschool_Project_Part_4/dataManagement/json_data.json")
 """
 The list of users page
 """
@@ -32,16 +32,29 @@ def login(user_id):
     session_user = chosen_user[0]
 
     if request.method == "POST":
-        session.pop("user", None)
-
-        if request.form.get("password") == session_user['password'] and request.form.get("username") == session_user[
-            'name']:
-            session['user'] = request.form["username"]
-            return redirect(url_for('user_movies', user_id=user_id))
-        else:
-            flash("Please make sure Username and Password are correct")
+        try:
+          if request.form.get("password") == session_user['password'] and request.form.get("username") == session_user['name']:
+              session['user'] = request.form["username"]
+              flash("successfully logged in")
+              return redirect(url_for("user_movies", user_id=user_id))
+          else:
+              flash("Please make sure Username and Password are correct")
+        except Exception as e:
+          flash(f"there was a probplem : {e}") 
 
     return render_template("login_page.html", user_id=user_id, user=chosen_user[0])
+
+
+"""
+The Movie Database of the user
+"""
+
+@app.route('/users/<int:user_id>')
+def user_movies(user_id):
+    if g.user:
+        the_movies = data_manager.get_user_movies(user_id)
+        return render_template("user_page.html", user_id=user_id, user=session['user'], movies=the_movies)
+    return redirect(url_for("list_users"))
 
 
 """
@@ -65,6 +78,7 @@ def delete_user(user_id):
     chosen_user = [user_data for user_data in data_manager.list_all_users() if user_data["id"] == user_id]
     if request.form.get("delete_user") == chosen_user[0]["password"]:
         data_manager.delete_user(user_id)
+        flash("user deleted")
         return redirect(url_for('list_users'))
     else:
         flash("Password not correct")
@@ -122,19 +136,6 @@ def accessibility_settings(user_id):
 
 
 """
-The Movie Database of the user
-"""
-
-
-@app.route('/users/<int:user_id>')
-def user_movies(user_id):
-    if g.user:
-        the_movies = data_manager.get_user_movies(user_id)
-        return render_template("user_page.html", user_id=user_id, user=session['user'], movies=the_movies)
-    return redirect(url_for("list_users"))
-
-
-"""
 Adds a new user
 """
 
@@ -145,6 +146,7 @@ def add_user():
         new_user = request.form.get("name")
         new_user_psw = request.form.get("password")
         data_manager.add_user(new_user, new_user_psw)
+        flash("User added")
         return redirect(url_for("list_users"))
 
     return render_template("add_user.html")
@@ -163,10 +165,11 @@ def add_movie(user_id):
         movie_title = request.form.get("movie_name")
         movie_notes = request.form.get("movie_notes")
 
-        success_message = data_manager.add_movie(user_id, movie_title, movie_notes)
+        data_manager.add_movie(user_id, movie_title, movie_notes)
+        flash(f"{movie_title} added to database")
         new_movie_list = data_manager.get_user_movies(user_id)
 
-        return render_template("add_movie.html", movies=new_movie_list, id=user_id, success_message=success_message)
+        return render_template("add_movie.html", movies=new_movie_list, id=user_id)
     return render_template("add_movie.html", movies=user_movie, id=user_id)
 
 
@@ -178,11 +181,14 @@ Updates the users notes on the film
 @app.route('/users/<int:user_id>/update_movie/<int:movie_id>', methods=["GET", "POST"])
 def update_movie(user_id, movie_id):
     if request.method == "POST":
+      try: 
         note_updates = request.form.get("notes")
-        print(note_updates)
-        success_message = data_manager.update_user_movie(user_id, movie_id, note_updates)
-
-        return redirect(url_for("user_movies", user_id=user_id, success_message=success_message))
+        rating_updates = request.form.get("Rating")
+        data_manager.update_user_movie(user_id, movie_id, note_updates, rating_updates)
+        flash("successfully updated film")
+        return redirect(url_for("user_movies", user_id=user_id))
+      except Exception as e:
+        flash(f"something went wrong : {e}")
     return render_template("update.html", user_id=user_id, movie_id=movie_id)
 
 
@@ -194,8 +200,9 @@ Deletes a film from the users database
 @app.route("/users/<user_id>/delete_movie/<movie_id>", methods=["POST"])
 def delete_movie(user_id, movie_id):
     movie_to_delete = request.form.get("delete_movie")
-    success_message = data_manager.delete_movie(user_id, movie_id, movie_to_delete)
-    return redirect(url_for("user_movies", user_id=user_id, success_message=success_message))
+    data_manager.delete_movie(user_id, movie_id, movie_to_delete)
+    flash("movie deleted successfully")
+    return redirect(url_for("user_movies", user_id=user_id, ))
 
 
 """
@@ -227,4 +234,5 @@ def before_request():
 
 
 if __name__ in "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port='5000', debug=True)
+
